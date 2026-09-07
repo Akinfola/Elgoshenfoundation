@@ -1,0 +1,38 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "img/uploads"
+public_folder: "/img/uploads"
+
+collections:
+  - name: "site_images"
+    label: "Website Images"
+    files:
+      - label: "Image Library"
+        name: "image_library"
+        file: "data/site-images.json"
+        format: "json"
+        fields:
+          - label: "Website images"
+            name: "images"
+            widget: "object"
+            fields:
+              - { label: "Homepage hero — slide 1", name: "carouselOne", widget: "image" }
+              - { label: "Homepage hero — slide 2", name: "carouselTwo", widget: "image" }
+              - { label: "About section", name: "about", widget: "image" }
+              - { label: "Program — food security", name: "donationOne", widget: "image" }
+              - { label: "Program — clean water", name: "donationTwo", widget: "image" }
+              - { label: "Program — education", name: "donationThree", widget: "image" }
+              - { label: "Leadership — member 1", name: "teamOne", widget: "image" }
+              - { label: "Leadership — member 2", name: "teamTwo", widget: "image" }
+              - { label: "Leadership — member 3", name: "teamThree", widget: "image" }
+              - { label: "Story — image 1", name: "testimonialOne", widget: "image" }
+              - { label: "Story — image 2", name: "testimonialTwo", widget: "image" }
+              - { label: "Story — image 3", name: "testimonialThree", widget: "image" }
+              - { label: "Gallery image 1", name: "galleryOne", widget: "image" }
+              - { label: "Gallery image 2", name: "galleryTwo", widget: "image" }
+              - { label: "Gallery image 3", name: "galleryThree", widget: "image" }
+              - { label: "Gallery image 4", name: "galleryFour", widget: "image" }
+              - { label: "Gallery image 5", name: "galleryFive", widget: "image" }
+              - { label: "Gallery image 6", name: "gallerySix", widget: "image" }

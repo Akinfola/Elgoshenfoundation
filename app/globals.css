@@ -1,0 +1,6 @@
+@import url("/lib/animate/animate.min.css");
+@import url("/lib/owlcarousel/assets/owl.carousel.min.css");
+@import url("/css/bootstrap.min.css");
+@import url("/css/style.css");
+
+html { scroll-behavior: smooth; }
