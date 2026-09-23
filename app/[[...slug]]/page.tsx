@@ -5,12 +5,13 @@ import { LegacyPage } from "../components/legacy-page";
 
 const routes: Record<string, { file: string; title: string }> = {
   "": { file: "index.html", title: "El-Goshen Development Foundation - Community Development NGO" },
-  about: { file: "about.html", title: "About Us" },
-  contact: { file: "contact.html", title: "Contact Us" },
-  donation: { file: "donation.html", title: "Our Work" },
-  feature: { file: "feature.html", title: "Our Impact" },
-  team: { file: "team.html", title: "Leadership" },
-  testimonial: { file: "testimonial.html", title: "Stories" },
+  about: { file: "about.html", title: "About Us | El-Goshen Foundation" },
+  contact: { file: "contact.html", title: "Contact Us | El-Goshen Foundation" },
+  donation: { file: "donation.html", title: "Partner & Support | El-Goshen Foundation" },
+  feature: { file: "feature.html", title: "Our Programmes | El-Goshen Foundation" },
+  team: { file: "team.html", title: "Leadership & Governance | El-Goshen Foundation" },
+  blog: { file: "blog.html", title: "Outreach Blog & News | El-Goshen Foundation" },
+  testimonial: { file: "testimonial.html", title: "Community Stories | El-Goshen Foundation" },
   "404": { file: "404.html", title: "Page Not Found" },
 };
 const documentRoot = path.join(process.cwd(), "legacy-pages");
@@ -22,7 +23,7 @@ function prepareMarkup(document: string): string {
     .replace(/ElGoshen<span>Foundation<\/span>/g, "El-Goshen<span> Development Foundation</span>")
     .replace(/ElGoshenFoundation/g, "El-Goshen Development Foundation")
     .replace(/ElGoshen Development Foundation/g, "El-Goshen Development Foundation")
-    .replace(/(href|src)="(index|about|contact|donation|feature|team|testimonial|404)\.html"/g, (_, attribute, page) => `${attribute}="${toRoutePath(`${page}.html`)}"`)
+    .replace(/(href|src)="(index|about|contact|donation|feature|team|blog|testimonial|404)\.html"/g, (_, attribute, page) => `${attribute}="${toRoutePath(`${page}.html`)}"`)
     .replace(/(href|src)="(img|css|js|lib|data|admin)\//g, '$1="/$2/');
 }
 export function generateStaticParams() { return Object.keys(routes).filter(Boolean).map((route) => ({ slug: [route] })); }

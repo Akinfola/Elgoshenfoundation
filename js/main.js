@@ -117,5 +117,30 @@
     });
 
     
+    // Dark / Light Theme Toggle
+    var updateToggleUI = function (isDark) {
+        $('.theme-toggle-trigger i').attr('class', isDark ? 'fa fa-sun text-warning' : 'fa fa-moon');
+    };
+
+    var initThemeToggle = function () {
+        var savedTheme = localStorage.getItem('elgoshen-theme');
+        var isDark = savedTheme === 'dark' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        
+        if (isDark) {
+            $('body').addClass('dark-mode');
+        } else {
+            $('body').removeClass('dark-mode');
+        }
+        updateToggleUI(isDark);
+
+        $(document).on('click', '#theme-toggle-btn, .theme-toggle-trigger', function (e) {
+            e.preventDefault();
+            var currentlyDark = $('body').toggleClass('dark-mode').hasClass('dark-mode');
+            localStorage.setItem('elgoshen-theme', currentlyDark ? 'dark' : 'light');
+            updateToggleUI(currentlyDark);
+        });
+    };
+    initThemeToggle();
+
 })(jQuery);
 

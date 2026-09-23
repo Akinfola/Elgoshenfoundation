@@ -1008,6 +1008,73 @@ body {
     }
 }
 /*** Mobile header scroll colour ***/
+/*** Dark / Light Mode Theme Styles ***/
+body {
+    transition: background-color .3s ease, color .3s ease;
+}
+
+body.dark-mode {
+    background-color: #0f172a !important;
+    color: #f1f5f9 !important;
+}
+
+body.dark-mode .bg-light {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+}
+
+body.dark-mode .bg-white {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+}
+
+body.dark-mode .card,
+body.dark-mode .shadow-sm,
+body.dark-mode .shadow-lg {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+}
+
+body.dark-mode .card-body,
+body.dark-mode .card-footer {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+}
+
+body.dark-mode .text-dark {
+    color: #f8fafc !important;
+}
+
+body.dark-mode .text-muted {
+    color: #cbd5e1 !important;
+}
+
+body.dark-mode .section-title {
+    background-color: transparent !important;
+}
+
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+}
+
+body.dark-mode .form-control::placeholder {
+    color: #94a3b8 !important;
+}
+
+#theme-toggle-btn {
+    display: none !important;
+    cursor: pointer;
+    transition: all .3s ease;
+    border: 1px solid rgba(255, 255, 255, .3);
+}
+
+#theme-toggle-btn:hover {
+    transform: scale(1.05);
+}
 @media (max-width: 991.98px) {
     .nav-bar .navbar {
         background-color: var(--bs-secondary) !important;
