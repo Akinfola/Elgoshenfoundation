@@ -14,7 +14,7 @@ const routes: Record<string, { file: string; title: string }> = {
   testimonial: { file: "testimonial.html", title: "Community Stories | El-Goshen Foundation" },
   "404": { file: "404.html", title: "Page Not Found" },
 };
-const documentRoot = path.join(process.cwd(), "legacy-pages");
+const documentRoot = process.cwd();
 function toRoutePath(file: string): string { return file === "index.html" ? "/" : `/${file.replace(/\.html$/, "")}`; }
 function prepareMarkup(document: string): string {
   const body = document.match(/<body[^>]*>([\s\S]*?)<script[\s\S]*?<\/body>/i)?.[1] ?? "";
