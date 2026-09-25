@@ -124,7 +124,7 @@
 
     var initThemeToggle = function () {
         var savedTheme = localStorage.getItem('elgoshen-theme');
-        var isDark = savedTheme === 'dark' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var isDark = savedTheme === 'dark';
         
         if (isDark) {
             $('body').addClass('dark-mode');
