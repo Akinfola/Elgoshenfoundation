@@ -413,15 +413,16 @@
 
 .header-carousel .owl-nav {
     position: absolute;
-    inset: 0;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
     z-index: 3;
 }
 
 .header-carousel .owl-nav .owl-prev,
 .header-carousel .owl-nav .owl-next {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     width: 48px;
     height: 48px;
     margin: 0;
@@ -438,16 +439,18 @@
 }
 
 .header-carousel .owl-nav .owl-prev {
-    left: 0;
+    left: 22px;
+    top: -36px;
 }
 
 .header-carousel .owl-nav .owl-next {
-    right: 0;
+    right: 22px;
+    bottom: -36px;
 }
 
 .header-carousel .owl-nav .owl-prev:hover,
 .header-carousel .owl-nav .owl-next:hover {
-    transform: translateY(-50%) scale(1.02);
+    transform: translateY(-1px);
     box-shadow: 0 12px 22px rgba(0, 0, 0, 0.2);
 }
 
