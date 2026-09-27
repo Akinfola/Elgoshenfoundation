@@ -50,6 +50,90 @@
     });
 
 
+    var initYoutubeHoverPreviews = function () {
+        var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+        document.querySelectorAll('[data-youtube-hover]').forEach(function (container) {
+            var videoId = container.getAttribute('data-youtube-hover');
+            var poster = container.querySelector('img');
+            var playIcon = container.querySelector('[data-video-play-icon]');
+            var playerHost = null;
+            var iframe = null;
+            var iframeReady = false;
+            var isPreviewActive = false;
+
+            var showPoster = function () {
+                poster.hidden = false;
+                if (playIcon) playIcon.hidden = false;
+            };
+
+            var sendPlayerCommand = function (command) {
+                if (!iframeReady || !iframe || !iframe.contentWindow) return;
+                iframe.contentWindow.postMessage(JSON.stringify({event: 'command', func: command, args: ''}), 'https://www.youtube.com');
+            };
+
+            var startPreview = function (isTouch) {
+                if (!videoId || !poster) return;
+                isPreviewActive = true;
+                poster.hidden = true;
+                if (playIcon) playIcon.hidden = true;
+
+                if (iframe) {
+                    playerHost.style.display = 'block';
+                    sendPlayerCommand('playVideo');
+                    return;
+                }
+
+                playerHost = document.createElement('div');
+                playerHost.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:' + (isTouch ? 'auto' : 'none') + ';';
+                iframe = document.createElement('iframe');
+                iframe.src = 'https://www.youtube.com/embed/' + encodeURIComponent(videoId) + '?autoplay=1&mute=1&playsinline=1&controls=' + (isTouch ? '1' : '0') + '&enablejsapi=1&origin=' + encodeURIComponent(window.location.origin) + '&rel=0';
+                iframe.title = container.getAttribute('aria-label') || 'Video preview';
+                iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+                iframe.allowFullscreen = true;
+                iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+                iframe.style.cssText = 'width:100%;height:100%;border:0;pointer-events:' + (isTouch ? 'auto' : 'none') + ';';
+                iframe.addEventListener('load', function () {
+                    iframeReady = true;
+                    if (isPreviewActive) {
+                        sendPlayerCommand('mute');
+                        sendPlayerCommand('playVideo');
+                    } else {
+                        sendPlayerCommand('pauseVideo');
+                        playerHost.style.display = 'none';
+                    }
+                });
+                playerHost.appendChild(iframe);
+                container.appendChild(playerHost);
+            };
+
+            var stopPreview = function () {
+                isPreviewActive = false;
+                sendPlayerCommand('pauseVideo');
+                if (playerHost) playerHost.style.display = 'none';
+                showPoster();
+            };
+
+            if (canHover) {
+                container.addEventListener('mouseenter', function () { startPreview(false); });
+                container.addEventListener('mouseleave', function () {
+                    if (!container.matches(':focus-within')) stopPreview();
+                });
+                container.addEventListener('focusin', function () { startPreview(false); });
+                container.addEventListener('focusout', function (event) {
+                    if (!container.contains(event.relatedTarget) && !container.matches(':hover')) stopPreview();
+                });
+            } else {
+                container.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    if (isPreviewActive) stopPreview();
+                    else startPreview(true);
+                });
+            }
+        });
+    };
+    initYoutubeHoverPreviews();
+
     // Modal Video
     $(document).ready(function () {
         var $videoSrc;
