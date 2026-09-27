@@ -9,6 +9,7 @@ const routes: Record<string, { file: string; title: string }> = {
   contact: { file: "contact.html", title: "Contact Us | El-Goshen Foundation" },
   donation: { file: "donation.html", title: "Partner & Support | El-Goshen Foundation" },
   feature: { file: "feature.html", title: "Our Programmes | El-Goshen Foundation" },
+  media: { file: "media.html", title: "Videos & Photos | El-Goshen Foundation" },
   team: { file: "team.html", title: "Leadership & Governance | El-Goshen Foundation" },
   blog: { file: "blog.html", title: "Outreach Blog & News | El-Goshen Foundation" },
   testimonial: { file: "testimonial.html", title: "Community Stories | El-Goshen Foundation" },
@@ -23,7 +24,7 @@ function prepareMarkup(document: string): string {
     .replace(/ElGoshen<span>Foundation<\/span>/g, "El-Goshen<span> Development Foundation</span>")
     .replace(/ElGoshenFoundation/g, "El-Goshen Development Foundation")
     .replace(/ElGoshen Development Foundation/g, "El-Goshen Development Foundation")
-    .replace(/(href|src)="(index|about|contact|donation|feature|team|blog|testimonial|404)\.html"/g, (_, attribute, page) => `${attribute}="${toRoutePath(`${page}.html`)}"`)
+    .replace(/(href|src)="(index|about|contact|donation|feature|media|team|blog|testimonial|404)\.html"/g, (_, attribute, page) => `${attribute}="${toRoutePath(`${page}.html`)}"`)
     .replace(/(href|src)="(img|css|js|lib|data|admin)\//g, '$1="/$2/');
 }
 export function generateStaticParams() { return Object.keys(routes).filter(Boolean).map((route) => ({ slug: [route] })); }
